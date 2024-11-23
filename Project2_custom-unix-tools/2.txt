@@ -1,2 +1,5 @@
-This is my testfile2
-for my second project
+A pipe is a communication mechanism that allows data to flow between two processes. 
+In Unix-like systems, pipes are used for inter-process communication IPC. 
+A pipe connects the output of one process directly to the input of another.
+Pipes can be either anonymous for communication between related processes like parent-child or named for communication between unrelated processes.
+pipe
