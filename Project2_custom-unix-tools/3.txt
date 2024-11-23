@@ -1,2 +1,3 @@
-jhqencjbusduwr m  LIFhqiA ETf
- jfhapie u
+Shared memory is a method of inter-process communication where multiple processes can access the same portion of memory.
+It allows processes to exchange data without needing to go through the kernel, making it faster compared to other IPC methods.
+Synchronization mechanisms like semaphores or mutexes are typically used to prevent race conditions when accessing shared memory.
