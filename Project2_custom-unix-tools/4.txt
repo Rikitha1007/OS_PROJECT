@@ -1,2 +1,3 @@
-vvvvvvvvvvvvvvvvvv 333333333333333 3jjjjjjjjjjjj
-aaaaaaaaaaaaaaaaaaaaaaaaaaa
+A message queue is an IPC mechanism where processes can exchange messages. 
+Processes can send and receive messages in a queue, which is managed by the operating system. 
+It allows for asynchronous communication, meaning the sender and receiver do not need to be synchronized. Message queues can store messages in a first-in, first-out FIFO order or according to priority.
