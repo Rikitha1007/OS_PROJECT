@@ -1,1 +1,4 @@
-The fork system call is used in Unix-based operating systems to create a new process. The new process, known as the child process, is a duplicate of the parent process. It inherits the parent's resources, such as file descriptors, but can execute independently. fork returns a value of 0 to the child process and the child process's PID to the parent process.
+The fork system call is used in Unix-based operating systems to create a new process. 
+The new process, known as the child process, is a duplicate of the parent process.
+It inherits the parent's resources, such as file descriptors, but can execute independently.
+fork returns a value of 0 to the child process and the child process's PID to the parent process.
