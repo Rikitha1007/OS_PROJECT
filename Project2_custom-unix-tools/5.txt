@@ -1,2 +1,4 @@
-hello guys
-how are you
+A signal is a limited form of inter-process communication used in Unix-like systems to notify processes about events or conditions.
+A process can send a signal to another process, which may cause the receiving process to take action like terminating or handling an event.
+Common signals include SIGINT interrupt, SIGKILL force termination, and SIGSTOP stop a process. 
+Signals are typically used for process control.
