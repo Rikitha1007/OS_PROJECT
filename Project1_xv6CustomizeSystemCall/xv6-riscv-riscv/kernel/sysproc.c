@@ -43,6 +43,21 @@ sys_wait(void)
   printf("Process %s (PID %d) is waiting for a child to exit.\n", myproc()->name, myproc()->pid);
   return wait(p);
 }
+/*
+uint64
+sys_wait(void) {
+  uint64 addr;
+  int timeout;
+  
+  if (argaddr(0, &addr) < 0) // Get address of the status
+    return -1;
+  if (argint(1, &timeout) < 0) // Get timeout value
+    return -1;
+
+  return wait(addr, timeout);
+}
+*/
+
 
 uint64
 sys_sbrk(void)
