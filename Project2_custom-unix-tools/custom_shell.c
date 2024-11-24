@@ -35,7 +35,7 @@ void custom_shell_loop() {
 
         // Exit condition
         if (strcmp(argv[0], "exit") == 0) {
-            printf("Goodbye!\n");
+            printf("exiting the shell\n");
             break;
         }
 
