@@ -136,12 +136,67 @@ void custom_cp(int argc, char *argv[]) {
 
 void custom_rm(int argc, char *argv[]) {
     if (argc < 2) {
-        fprintf(stderr, "Usage: custom_rm <file>\n");
+        printf("Usage: custom_rm [path]\n");
         return;
     }
 
-    if (remove(argv[1]) != 0) {
-        perror("custom_rm");
+    const char *filepath = argv[1];
+    struct stat path_stat;
+
+    // Check if the path exists
+    if (stat(filepath, &path_stat) != 0) {
+        perror("Error");
+        return;
+    }
+
+    // Check if it's a directory
+    if (S_ISDIR(path_stat.st_mode)) {
+        DIR *dir = opendir(filepath);
+        if (!dir) {
+            perror("Error opening directory");
+            return;
+        }
+
+        struct dirent *entry;
+        char path[1024];
+
+        // Iterate through directory contents and delete files and subdirectories
+        while ((entry = readdir(dir)) != NULL) {
+            // Skip "." and ".."
+            if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
+                continue;
+            }
+
+            snprintf(path, sizeof(path), "%s/%s", filepath, entry->d_name);
+            struct stat entry_stat;
+            if (stat(path, &entry_stat) == 0) {
+                if (S_ISDIR(entry_stat.st_mode)) {
+                    // Recursively remove subdirectory (delete it after contents are removed)
+                    custom_rm(2, (char *[]){argv[0], path});
+                } else {
+                    // Remove the file
+                    if (unlink(path) != 0) {
+                        perror("Error deleting file");
+                    }
+                }
+            }
+        }
+
+        closedir(dir);
+
+        // Remove the directory itself after all contents are deleted
+        if (rmdir(filepath) != 0) {
+            perror("Error removing directory");
+        } else {
+            printf("Directory '%s' deleted successfully.\n", filepath);
+        }
+    } else {
+        // It's a file, just delete it
+        if (unlink(filepath) == 0) {
+            printf("File '%s' deleted successfully.\n", filepath);
+        } else {
+            perror("Error deleting file");
+        }
     }
 }
 
@@ -196,6 +251,5 @@ void custom_grep(int argc, char *argv[]) {
     }
     fclose(file);
 }
-
 
 
